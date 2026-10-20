@@ -1,0 +1,22 @@
+DROP VIEW SRC_MOVIES;
+
+MOVIELENS.DEV.EP_MOVIES_WITH_TAGSMOVIELENS.DEV.EP_MOVIES_WITH_TAGSSELECT * FROM MOVIELENS.DEV.FCT_RATINGS
+ORDER BY rating_timestamp DESC
+LIMIT 5;
+
+SELECT * FROM MOVIELENS.DEV.SRC_RATINGS
+ORDER BY rating_timestamp DESC
+LIMIT 5;
+
+INSERT INTO MOVIELENS.DEV.SRC_RATINGS ( user_id, movie_id, rating, rating_timestamp)
+VALUES(87587, '7151', '4.0', '2015-03-31 23:40:02.000 -0700')
+
+SELECT * FROM snapshots.snap_tags
+ORDER BY user_id, dbt_valid_from DESC;
+
+UPDATE src_tags
+SET tag = 'Mark Waters Returns', tag_timestamp = CAST(CURRENT_TIMESTAMP() as TIMESTAMP_NTZ)
+WHERE user_id = 18;
+
+SELECT * FROM dev.src_tags
+WHERE user_id = 18;
